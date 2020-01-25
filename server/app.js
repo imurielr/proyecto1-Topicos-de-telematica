@@ -1,15 +1,18 @@
 var express = require("express");
+var cors = require('cors')
 
 var app = express();
 var port = 3000;
+
+app.use(cors())
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get("/", (req, res) => {
-//     res.send("Hello World");
-// });
+app.get("/info", (req, res) => {
+    res.json("Hello World");
+});
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
