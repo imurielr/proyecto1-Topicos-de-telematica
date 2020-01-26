@@ -1,10 +1,44 @@
 <mat-toolbar color="primary" [class.mat-elevation-z6]=true>
-  
-  <mat-icon>wb_sunny</mat-icon> 
+
+  <mat-icon>wb_sunny</mat-icon>
   <span style="margin-left: 10px;">Climate History</span>
 
 </mat-toolbar>
 
-<p>Data: {{data}}</p>
+<br><br>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- User Column -->
+  <ng-container matColumnDef="user">
+    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+    <td mat-cell *matCellDef="let element"> {{element.user}} </td>
+  </ng-container>
+
+  <!-- Temperature Column -->
+  <ng-container matColumnDef="temperature">
+    <th mat-header-cell *matHeaderCellDef> Temperatura (ºC) </th>
+    <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+  </ng-container>
+
+  <!-- Humidity Column -->
+  <ng-container matColumnDef="humidity">
+    <th mat-header-cell *matHeaderCellDef> Humedad </th>
+    <td mat-cell *matCellDef="let element"> {{element.humidity}} </td>
+  </ng-container>
+
+  <!-- GPS Column -->
+  <ng-container matColumnDef="gps">
+    <th mat-header-cell *matHeaderCellDef> GPS </th>
+    <td mat-cell *matCellDef="let element"> {{element.gps}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 
 <router-outlet></router-outlet>
