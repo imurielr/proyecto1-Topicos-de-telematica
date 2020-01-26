@@ -10,10 +10,6 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/info", (req, res) => {
-    res.json("Hello World");
-});
-
 app.listen(port, () => {
     console.log("Server listening on port " + port);
 });
@@ -45,3 +41,18 @@ app.post("/add", (req, res) => {
             res.status(400).send("unable to save to database");
         });
 })
+
+app.get("/info", (req, res) => {
+    // res.json("Hello World");
+    
+    registry.find({}, function(err, result) {
+        if (err) throw err;
+        if (result) {
+            res.json(result)
+        } else {
+            res.send(JSON.stringify({
+                error : 'Error'
+            }))
+        }
+    });
+});
