@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
 
-import { API_URL } from './env';
-
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -12,26 +11,26 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
+  private user: SocialUser;
+  private loggedIn: boolean;
+  message = 'Iniciar Sesión con Google';
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.get();
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
   }
 
-  data: any = [{}];
-
-  displayedColumns: string[] = ['user', 'temperature', 'humidity', 'gps'];
-  dataSource: any;
-
-  get() {
-    const req = this.http.get(`${API_URL}/info`).subscribe(data => {
-      this.data = data;
-      this.dataSource = new MatTableDataSource(this.data);
-    })
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  signOut(): void {
+    this.authService.signOut();
   }
+
 }
