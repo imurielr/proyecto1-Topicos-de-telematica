@@ -22,7 +22,7 @@ var url = "mongodb+srv://imurielr:admin@registrosensor-sixrh.mongodb.net/Registr
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var data = new mongoose.Schema({
-    user: String,
+    MAC: String,
     temperature: Number,
     humidity: Number,
     gps: String
