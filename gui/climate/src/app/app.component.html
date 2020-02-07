@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" [class.mat-elevation-z6]=true>
+<mat-toolbar color="primary" [class.mat-elevation-z6]=true style="position: fixed; top: 0;">
 
   <mat-icon>wb_sunny</mat-icon>
   <span style="margin-left: 10px;">Climate History</span>
@@ -10,8 +10,23 @@
   
 </mat-toolbar>
 
-<br><br>
+<div *ngIf="!loggedIn" id="home">
 
-<app-table *ngIf="loggedIn"></app-table>
+  <br><br><br><br>
+  
+  <div>
+
+    <h2 align="center" id="title">Monitorea los sensores y enterate del estado del clima!</h2>
+
+  </div>
+</div>
+
+<div *ngIf="loggedIn">
+
+  <br><br><br><br>
+
+  <app-table></app-table>
+  
+</div>
 
 <router-outlet></router-outlet>

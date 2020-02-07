@@ -4,9 +4,38 @@
     flex: 1 1 auto;
   }
 
-#foto {
-   width:100%;
-   min-width:100%;
-   max-width:100;
-   opacity: 50%;
-}
+ .row {
+   display: flex;
+ }
+ 
+ .column {
+   flex: 33.33%;
+   padding: 5px;
+ }
+
+ #home {
+   background-image: url('../assets/backgroud.jpg');
+   height: 100%;
+   width: 102%;
+   overflow: hidden;
+   position: absolute; margin: 0px; padding: 0px; border: none; max-width: none; z-index: -999999;  left: -17.5588px; top: 0px;
+ }
+
+ #title {
+  color: #fff;
+  margin-top: 90px;
+  padding-bottom: 10px;
+  letter-spacing: 8px;
+  font-size: 100px;
+  font-weight: 700;
+  text-shadow: 2px 2px 2px #000;
+  margin-left: 10%;
+  margin-right: 10%;
+ }
+
+ /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+   .column {
+     width: 100%;
+   }
+ }

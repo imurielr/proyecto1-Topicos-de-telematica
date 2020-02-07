@@ -22,16 +22,28 @@ var url = "mongodb+srv://imurielr:admin@registrosensor-sixrh.mongodb.net/Registr
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var data = new mongoose.Schema({
-    MAC: String,
-    temperature: Number,
-    humidity: Number,
-    gps: String
+    MAC: {
+        type: String,
+        required: true
+    },
+    temperature: {
+        type: Number,
+        required: true
+    },
+    humidity: {
+        type: Number,
+        required: true
+    },
+    gps: {
+        type: String,
+        required: true
+    }
 });
 
 var registry = mongoose.model("Registros", data);
 
 app.post("/add", (req, res) => {
-    // console.log(req.query);
+
     var myData = new registry(req.query);
     myData.save()
         .then(item => {
@@ -42,8 +54,7 @@ app.post("/add", (req, res) => {
         });
 })
 
-app.get("/info", (req, res) => {
-    // res.json("Hello World");
+app.get("/info", (req, res) => {    
     
     registry.find({}, function(err, result) {
         if (err) throw err;

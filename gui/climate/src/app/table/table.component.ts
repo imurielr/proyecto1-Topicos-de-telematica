@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
 
   data: any = [{}];
 
-  displayedColumns: string[] = ['user', 'temperature', 'humidity', 'gps'];
+  displayedColumns: string[] = ['temperature', 'humidity', 'gps'];
   dataSource: any;
 
   get() {
